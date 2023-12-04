@@ -1,7 +1,7 @@
-// year semesterCode 4digit number
-import { TAcademicSemester } from '../semester/semester.interface'
+import { TSemester } from '../semester/semester.interface'
 import User from './user.model'
 
+// year semesterCode 4digit number
 const findLastStudentId = async () => {
   const lastStudent = await User.findOne(
     {
@@ -21,7 +21,7 @@ const findLastStudentId = async () => {
   return lastStudent?.id ? lastStudent.id : undefined
 }
 
-export const generateStudentId = async (payload: TAcademicSemester) => {
+export const generateStudentId = async (payload: TSemester) => {
   // first time 0000
   //0001  => 1
   let currentId = (0).toString() // 0000 by default

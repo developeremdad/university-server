@@ -134,11 +134,16 @@ const studentSchema = new Schema<TStudent, StudentModel>(
       required: [true, 'Local guardian information is required'],
     },
     profileImg: { type: String },
-    admissionSemester: {
+    semester: {
       type: Schema.Types.ObjectId,
       required: [true, 'Admission semester is required'],
-      ref: 'AcademicSemester',
+      ref: 'Semester',
     },
+    department:{
+      type: Schema.Types.ObjectId,
+      required: [true, "Academic department is required"],
+      ref: "Department"
+    }
   },
   {
     toJSON: {

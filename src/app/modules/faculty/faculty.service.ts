@@ -18,13 +18,6 @@ const getSingleFacultyFromDB = async (id: string) => {
   return result
 }
 
-// Update academic faculty
-// const updateFacultyIntoDB = async (id: string, payload: Partial<TFaculty>) => {
-//   const result = await Faculty.findOneAndUpdate({ _id: id }, payload, {
-//     new: true,
-//   })
-//   return result
-// }
 const updateFacultyIntoDB = async (
   id: string,
   payload: Partial<TFaculty>,
