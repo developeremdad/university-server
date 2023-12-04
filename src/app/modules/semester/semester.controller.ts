@@ -2,16 +2,12 @@ import { Request, Response } from 'express'
 import httpStatus from 'http-status'
 import catchAsync from '../../utils/catchAsync'
 import sendResponse from '../../utils/sendResponse'
-import { AcademicSemesterServices } from './academicSemester.service'
+import { SemesterServices } from './semester.service'
 
 // Create academic semester
-const createAcademicSemester = catchAsync(
+const createSemester = catchAsync(
   async (req: Request, res: Response) => {
-    const { academicSemester: academicSemesterData } = req.body
-    const result =
-      await AcademicSemesterServices.createAcademicSemesterIntoDB(
-        academicSemesterData,
-      )
+    const result = await SemesterServices.createSemesterIntoDB(req.body)
 
     sendResponse(res, {
       statusCode: httpStatus.OK,
@@ -22,11 +18,11 @@ const createAcademicSemester = catchAsync(
   },
 )
 
-// Retrieve all AcademicSemesters
-const getAllAcademicSemesters = catchAsync(
+// Retrieve all Semesters
+const getAllSemesters = catchAsync(
   async (_req: Request, res: Response) => {
     const result =
-      await AcademicSemesterServices.getAllAcademicSemestersFromDB()
+      await SemesterServices.getAllSemestersFromDB()
 
     sendResponse(res, {
       statusCode: httpStatus.OK,
@@ -37,13 +33,13 @@ const getAllAcademicSemesters = catchAsync(
   },
 )
 
-// Retrieve a single AcademicSemester
-const getSingleAcademicSemester = catchAsync(
+// Retrieve a single Semester
+const getSingleSemester = catchAsync(
   async (req: Request, res: Response) => {
     const { semesterId } = req.params
 
     const result =
-      await AcademicSemesterServices.getSingleAcademicSemesterFromDB(semesterId)
+      await SemesterServices.getSingleSemesterFromDB(semesterId)
 
     sendResponse(res, {
       statusCode: httpStatus.OK,
@@ -55,9 +51,9 @@ const getSingleAcademicSemester = catchAsync(
 )
 
 // Update academic semester
-const updateAcademicSemester = catchAsync(async (req, res) => {
+const updateSemester = catchAsync(async (req, res) => {
   const { semesterId } = req.params
-  const result = await AcademicSemesterServices.updateAcademicSemesterIntoDB(
+  const result = await SemesterServices.updateSemesterIntoDB(
     semesterId,
     req.body,
   )
@@ -71,12 +67,12 @@ const updateAcademicSemester = catchAsync(async (req, res) => {
 })
 
 // // Delete academic semester
-// const deleteAcademicSemester = catchAsync(
+// const deleteSemester = catchAsync(
 //   async (req: Request, res: Response) => {
 //     const { semesterId } = req.params
 
 //     const result =
-//       await AcademicSemesterServices.deleteAcademicSemesterFromDB(semesterId)
+//       await SemesterServices.deleteSemesterFromDB(semesterId)
 
 //     sendResponse(res, {
 //       statusCode: httpStatus.OK,
@@ -87,9 +83,9 @@ const updateAcademicSemester = catchAsync(async (req, res) => {
 //   },
 // )
 
-export const AcademicSemesterControllers = {
-  createAcademicSemester,
-  getAllAcademicSemesters,
-  getSingleAcademicSemester,
-  updateAcademicSemester,
+export const SemesterControllers = {
+  createSemester,
+  getAllSemesters,
+  getSingleSemester,
+  updateSemester,
 }
