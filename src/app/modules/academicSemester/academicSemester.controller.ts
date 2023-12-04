@@ -24,7 +24,7 @@ const createAcademicSemester = catchAsync(
 
 // Retrieve all AcademicSemesters
 const getAllAcademicSemesters = catchAsync(
-  async (req: Request, res: Response) => {
+  async (_req: Request, res: Response) => {
     const result =
       await AcademicSemesterServices.getAllAcademicSemestersFromDB()
 
@@ -40,12 +40,10 @@ const getAllAcademicSemesters = catchAsync(
 // Retrieve a single AcademicSemester
 const getSingleAcademicSemester = catchAsync(
   async (req: Request, res: Response) => {
-    const { AcademicSemesterId } = req.params
+    const { semesterId } = req.params
 
     const result =
-      await AcademicSemesterServices.getSingleAcademicSemesterFromDB(
-        AcademicSemesterId,
-      )
+      await AcademicSemesterServices.getSingleAcademicSemesterFromDB(semesterId)
 
     sendResponse(res, {
       statusCode: httpStatus.OK,
@@ -56,27 +54,42 @@ const getSingleAcademicSemester = catchAsync(
   },
 )
 
-const deleteAcademicSemester = catchAsync(
-  async (req: Request, res: Response) => {
-    const { AcademicSemesterId } = req.params
+// Update academic semester
+const updateAcademicSemester = catchAsync(async (req, res) => {
+  const { semesterId } = req.params
+  const result = await AcademicSemesterServices.updateAcademicSemesterIntoDB(
+    semesterId,
+    req.body,
+  )
 
-    const result =
-      await AcademicSemesterServices.deleteAcademicSemesterFromDB(
-        AcademicSemesterId,
-      )
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Academic semester updated successfully',
+    data: result,
+  })
+})
 
-    sendResponse(res, {
-      statusCode: httpStatus.OK,
-      success: true,
-      message: 'Academic semester is deleted successfully',
-      data: result,
-    })
-  },
-)
+// // Delete academic semester
+// const deleteAcademicSemester = catchAsync(
+//   async (req: Request, res: Response) => {
+//     const { semesterId } = req.params
+
+//     const result =
+//       await AcademicSemesterServices.deleteAcademicSemesterFromDB(semesterId)
+
+//     sendResponse(res, {
+//       statusCode: httpStatus.OK,
+//       success: true,
+//       message: 'Academic semester is deleted successfully',
+//       data: result,
+//     })
+//   },
+// )
 
 export const AcademicSemesterControllers = {
   createAcademicSemester,
   getAllAcademicSemesters,
   getSingleAcademicSemester,
-  deleteAcademicSemester,
+  updateAcademicSemester,
 }

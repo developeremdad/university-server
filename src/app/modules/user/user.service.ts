@@ -17,9 +17,7 @@ const createStudentIntoDB = async (password: string, payload: TStudent) => {
   userData.role = 'student'
 
   // Find academic semester info
-  const semester = await AcademicSemester.findOne({
-    _id: payload.admissionSemester,
-  })
+  const semester = await AcademicSemester.findById(payload.admissionSemester)
 
   // Check semester is found
   if (!semester) {

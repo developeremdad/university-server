@@ -9,14 +9,11 @@ router.post(
 )
 
 router.get(
-  '/:AcademicSemesterId',
+  '/:semesterId',
   AcademicSemesterControllers.getSingleAcademicSemester,
 )
 
-router.delete(
-  '/:AcademicSemesterId',
-  AcademicSemesterControllers.deleteAcademicSemester,
-)
+router.patch('/:semesterId', AcademicSemesterControllers.updateAcademicSemester)
 
 router.get('/', AcademicSemesterControllers.getAllAcademicSemesters)
 
