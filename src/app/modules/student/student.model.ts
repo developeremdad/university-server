@@ -139,11 +139,15 @@ const studentSchema = new Schema<TStudent, StudentModel>(
       required: [true, 'Admission semester is required'],
       ref: 'Semester',
     },
-    department:{
+    department: {
       type: Schema.Types.ObjectId,
-      required: [true, "Academic department is required"],
-      ref: "Department"
-    }
+      required: [true, 'Academic department is required'],
+      ref: 'Department',
+    },
+    isDeleted: {
+      type: Boolean,
+      default: false,
+    },
   },
   {
     toJSON: {
