@@ -11,10 +11,10 @@ router.post(
   FacultyControllers.createFaculty,
 )
 
-router.get('/:facultyId', FacultyControllers.getSingleFaculty)
+router.get('/:id', FacultyControllers.getSingleFaculty)
 
 router.patch(
-  '/:facultyId',
+  '/:id',
   validateRequest(FacultyValidation.updateFacultyValidation),
   FacultyControllers.updateFaculty,
 )
